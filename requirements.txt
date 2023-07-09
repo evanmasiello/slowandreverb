@@ -1,5 +1,6 @@
 yt_dlp
 ffmpeg
+ffprobe
 pydub
 numpy
 soundfile
