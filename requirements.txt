@@ -1,5 +1,4 @@
-ffmpeg
-ffprobe
+ffmpeg-python
 pydub
 yt_dlp
 numpy
