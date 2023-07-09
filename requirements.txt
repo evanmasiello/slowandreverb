@@ -1,2 +1,3 @@
-yt_dlp
+yt_dlp-python
 ffmpeg-python
+pydub-python
