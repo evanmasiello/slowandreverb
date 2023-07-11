@@ -211,5 +211,16 @@ if (url):
                 file_name="slowreverb.wav",
                 mime="audio/wav"
             )
-    os.remove("slowreverb.wav")
+        os.system('python3 main.py slowreverb -m bars')
+        with open("slowreverb_processed.mp4", "rb") as file2:
+            st.video(file2, format='video/mp4')
+            st.download_button(
+                label="Download video",
+                data=file2,
+                file_name="slowreverb.mp4",
+                mime="video/wav"
+            )
+        os.remove("slowreverb.wav")
+        os.remove("slowreverb.mp4")
+        os.remove("slowreverb_processed.mp4")
     
