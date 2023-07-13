@@ -9,3 +9,4 @@ numpy
 pythumb
 soundfile
 tqdm
+pedalboard
