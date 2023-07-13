@@ -11,3 +11,7 @@ tqdm
 pedalboard
 moviepy
 click
+AudioAnalyzer
+random
+colorsys
+PIL
