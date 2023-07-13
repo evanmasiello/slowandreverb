@@ -11,3 +11,4 @@ soundfile
 tqdm
 pedalboard
 moviepy
+click
