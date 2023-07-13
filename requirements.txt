@@ -7,3 +7,4 @@ pydub
 yt_dlp
 numpy
 pythumb
+soundfile
