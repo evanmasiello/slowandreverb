@@ -1,3 +1,8 @@
 click==8.0.0
 matplotlib==3.4.2
-numpy==1.20.3
+ffmpeg
+ffprobe
+ffmpeg-python
+pydub
+yt_dlp
+numpy
