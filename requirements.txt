@@ -10,3 +10,4 @@ pythumb
 soundfile
 tqdm
 pedalboard
+moviepy
