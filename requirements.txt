@@ -11,5 +11,4 @@ tqdm
 pedalboard
 moviepy
 click
-colorsys
 PIL
