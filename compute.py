@@ -81,9 +81,9 @@ def animate_bars(i, lines, lines_x, wf, color, max_y, bar_min):
     return lines,
   N *= nFFT
   data = wf.readframes(N)
-  print('{:5.1f}% - V: {:5,d} - A: {:10,d} / {:10,d}'.format(
-    100.0 * wf.tell() / wf.getnframes(), i, wf.tell(), wf.getnframes()
-  ))
+  #print('{:5.1f}% - V: {:5,d} - A: {:10,d} / {:10,d}'.format(
+  #  100.0 * wf.tell() / wf.getnframes(), i, wf.tell(), wf.getnframes()
+  #))
 
   # Unpack data, LRLRLR...
   y = np.array(struct.unpack("%dh" % (len(data) / SAMPLE_SIZE), data)) / max_y
@@ -113,9 +113,9 @@ def animate_spectrum(i, line, wf, color, max_y):
     return line,
   N *= nFFT
   data = wf.readframes(N)
-  print('{:5.1f}% - V: {:5,d} - A: {:10,d} / {:10,d}'.format(
-    100.0 * wf.tell() / wf.getnframes(), i, wf.tell(), wf.getnframes()
-  ))
+  # print('{:5.1f}% - V: {:5,d} - A: {:10,d} / {:10,d}'.format(
+  #   100.0 * wf.tell() / wf.getnframes(), i, wf.tell(), wf.getnframes()
+  # ))
 
   # Unpack data, LRLRLR...
   y = np.array(struct.unpack("%dh" % (len(data) / SAMPLE_SIZE), data)) / max_y
@@ -139,9 +139,9 @@ def animate_wave(i, lines, wf, color, x, MAX_y):
     return lines,
   data = wf.readframes(N)
   y = np.array(struct.unpack("%dh" % (len(data) / SAMPLE_SIZE), data))
-  print('{:5.1f}% - V: {:5,d} - A: {:10,d} / {:10,d}'.format(
-    100.0 * wf.tell() / wf.getnframes(), i, wf.tell(), wf.getnframes()
-  ))
+  # print('{:5.1f}% - V: {:5,d} - A: {:10,d} / {:10,d}'.format(
+  #   100.0 * wf.tell() / wf.getnframes(), i, wf.tell(), wf.getnframes()
+  # ))
 
   if len(y) != 2 * len(x):
     return lines,
@@ -166,9 +166,9 @@ def animate_rain(i, circles, wf, color, max_y, max_point_size, min_amp_ratio):
     return circles,
   N *= nFFT
   data = wf.readframes(N)
-  print('{:5.1f}% - V: {:5,d} - A: {:10,d} / {:10,d}'.format(
-    100.0 * wf.tell() / wf.getnframes(), i, wf.tell(), wf.getnframes()
-  ))
+  # print('{:5.1f}% - V: {:5,d} - A: {:10,d} / {:10,d}'.format(
+  #   100.0 * wf.tell() / wf.getnframes(), i, wf.tell(), wf.getnframes()
+  # ))
 
   # Unpack data, LRLRLR...
   y = np.array(struct.unpack("%dh" % (len(data) / SAMPLE_SIZE), data)) / max_y

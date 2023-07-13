@@ -4,19 +4,50 @@ import ffmpeg
 import sys
 
 import streamlit as st
+import os
+
+import math
 
 """
 # Slow and Reverb
 
-In this form enter a youtube song link to slow and reverb the audio
+In this form enter a youtube song link to slow and reverb the audio, a video will also be generated with the slowed and reverbed song.
+You can edit the of the video using the slider below, the higher the resolution the longer the video will take to generate.
 
 """
 
-url = st.text_input('Enter a youtube url')
+try:
+    dir = './thumbnail/'
+    for f in os.listdir(dir):
+        os.remove(os.path.join(dir, f))
+
+    os.remove("slowreverb.wav")
+    os.remove("slowreverb.mp4")
+    os.remove("slowreverb_processed.mp4")
+    os.remove("slowreverb_processed_done.mp4")
+    os.remove("slowreverb_processed_done_processed.mp4")
+    os.remove("slow.wav")
+    os.remove("test.wav")
+except:
+    print("no old files")
 
 done = False
 
+if (done == False):
+    slider = st.slider("Video Resolution", min_value=0.1, max_value=1.0, value=0.5)
+
+url = st.text_input('Enter a youtube url')
+
 if (url):
+
+    #os.system("youtube-dl --write-thumbnail --skip-download " + url)
+
+    #print("finished")
+
+    from pythumb import Thumbnail
+    t = Thumbnail(url)
+    t.fetch()
+    t.save('thumbnail')
 
     ydl_opts = {
         'format': 'bestaudio/best',
@@ -25,7 +56,8 @@ if (url):
             'key': 'FFmpegExtractAudio',
             'preferredcodec': 'wav',
         }],
-        'outtmpl': 'test'
+        'outtmpl': 'test',
+        'write-thumbnail': 'True',
     }
     def download_from_url(url):
         ydl.download([url])
@@ -203,6 +235,7 @@ if (url):
         done = True
 
     if (done):
+
         with open("slowreverb.wav", "rb") as file:
             st.audio(file, format='audio/wav')
             st.download_button(
@@ -211,8 +244,52 @@ if (url):
                 file_name="slowreverb.wav",
                 mime="audio/wav"
             )
+
         os.system('python3 main.py slowreverb -m bars')
-        with open("slowreverb_processed.mp4", "rb") as file2:
+
+        import moviepy
+        import moviepy.editor as mp
+
+        import os
+        fnames = os.listdir("./thumbnail/")
+
+        # print(fnames[1])
+        for image in fnames:
+            print(image)
+
+        from PIL import Image
+
+        image = Image.open("./thumbnail/"+fnames[0])
+        print(f"Original size : {image.size}") # 5464x3640
+
+        if (slider == 1):
+            image_resized = image
+        else:
+            image_resized = image.resize((math.floor(image.width*slider), math.floor(image.height*slider)))
+            image_resized.save('./thumbnail/'+fnames[0])
+
+        video = mp.VideoFileClip("slowreverb_processed.mp4")
+        logo = (mp.ImageClip("./thumbnail/" + fnames[0]))
+
+        video = video.resize(height=image.height*slider)
+
+        print("duration ")
+        print(video.duration)
+
+        #logo = logo.set_duration(video.duration)
+
+        video = video.fx(mp.vfx.mask_color, color=[0, 0, 0], thr=100, s=5)
+
+        final = mp.CompositeVideoClip([logo, video.set_position("center")])
+
+        final = final.set_duration(video.duration)
+        final.write_videofile("slowreverb_processed_done.mp4")
+
+        os.system('sh add_audio_to_video.sh -a slowreverb -v slowreverb_processed_done')
+
+        os.remove("./thumbnail/" + fnames[0])
+
+        with open("slowreverb_processed_done_processed.mp4", "rb") as file2:
             st.video(file2, format='video/mp4')
             st.download_button(
                 label="Download video",
@@ -220,7 +297,9 @@ if (url):
                 file_name="slowreverb.mp4",
                 mime="video/wav"
             )
+            
         os.remove("slowreverb.wav")
         os.remove("slowreverb.mp4")
         os.remove("slowreverb_processed.mp4")
+        os.remove("slowreverb_processed_done_processed.mp4")
     
