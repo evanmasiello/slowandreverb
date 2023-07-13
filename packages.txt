@@ -1,2 +1,2 @@
 ffmpeg
-click==8.1.4
+click=8.1.4
