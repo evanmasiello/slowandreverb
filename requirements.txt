@@ -11,4 +11,3 @@ tqdm
 pedalboard
 moviepy
 click
-PIL
