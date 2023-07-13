@@ -10,4 +10,4 @@ soundfile
 tqdm
 pedalboard
 moviepy
-click
+click==8.1.4
