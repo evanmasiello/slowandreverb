@@ -268,6 +268,9 @@ if (url):
             image_resized = image.resize((math.floor(image.width*slider), math.floor(image.height*slider)))
             image_resized.save('./thumbnail/'+fnames[0])
 
+        for f in os.listdir("./"):
+            print(f)
+            
         video = mp.VideoFileClip("slowreverb.mp4")
         logo = (mp.ImageClip("./thumbnail/" + fnames[0]))
 
