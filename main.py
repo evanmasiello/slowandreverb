@@ -23,6 +23,7 @@ from compute import plt, compute, WIDTH, HEIGHT, \
               type=str, default='hue_rotate', show_default=True)
 @click.option('--output/--no-output', help='Whether to save the result in a file or display it directly',
               default=True, show_default=True)
+
 def main(filename, method, color, output):
   dpi = plt.rcParams['figure.dpi']
   plt.rcParams['savefig.dpi'] = 300
@@ -54,7 +55,6 @@ def main(filename, method, color, output):
     plt.show()
 
   wf.close()
-  os.system('sh add_audio_to_video.sh -a slowreverb -v slowreverb')
 
 if __name__ == '__main__':
   main()

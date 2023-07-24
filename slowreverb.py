@@ -20,13 +20,41 @@ try:
     dir = './thumbnail/'
     for f in os.listdir(dir):
         os.remove(os.path.join(dir, f))
-
+except:
+    print("no old files")
+try:
     os.remove("slowreverb.wav")
+except:
+    print("no old files")
+try:
     os.remove("slowreverb.mp4")
+except:
+    print("no old files")
+try:
     os.remove("slowreverb_processed.mp4")
+except:
+    print("no old files")
+try:
     os.remove("slowreverb_processed_done.mp4")
+except:
+    print("no old files")
+try:
     os.remove("slowreverb_processed_done_processed.mp4")
+except:
+    print("no old files")
+try:
+    os.remove("slowreverb_processed_done_processed.mp4")
+except:
+    print("no old files")
+try:
+    os.remove("slowreverb_processed_done_processed.mp4")
+except:
+    print("no old files")
+try:
     os.remove("slow.wav")
+except:
+    print("no old files")
+try:
     os.remove("test.wav")
 except:
     print("no old files")
@@ -245,7 +273,25 @@ if (url):
                 mime="audio/wav"
             )
 
-        os.system('python3 main.py slowreverb -m bars')
+        import random
+
+        rand = random.random()
+
+        print("rand is: " + str(rand))
+
+        type = 'wave'
+
+        if (rand > 0.5):
+            type = 'bars'
+
+
+        import subprocess
+        p = subprocess.call(['python3', 'main.py', 'slowreverb', '-m' + type])
+        #p.wait()
+
+        #os.system('python3 main.py slowreverb -m ' + type)
+
+        print("type is: " + type)
 
         import moviepy
         import moviepy.editor as mp
@@ -262,19 +308,22 @@ if (url):
         image = Image.open("./thumbnail/"+fnames[0])
         print(f"Original size : {image.size}") # 5464x3640
 
-        if (slider == 1):
-            image_resized = image
-        else:
-            image_resized = image.resize((math.floor(image.width*slider), math.floor(image.height*slider)))
-            image_resized.save('./thumbnail/'+fnames[0])
+        ratio = image.width / image.height
 
-        for f in os.listdir("./"):
-            print(f)
-            
+        image_resized = image.resize(( math.floor(math.floor(1920*slider)*ratio), math.floor(1920*slider)))
+        image_resized.save('./thumbnail/'+fnames[0])
+
+        print("here")
+
+        fnames2 = os.listdir("./")
+
+        for filename2 in fnames2:
+            print("\t" + filename2)
+
         video = mp.VideoFileClip("slowreverb.mp4")
         logo = (mp.ImageClip("./thumbnail/" + fnames[0]))
 
-        video = video.resize(height=image.height*slider)
+        video = video.resize(height=1920*slider)
 
         print("duration ")
         print(video.duration)
@@ -283,12 +332,16 @@ if (url):
 
         video = video.fx(mp.vfx.mask_color, color=[0, 0, 0], thr=100, s=5)
 
+        video = video.set_opacity(.75)
+
         final = mp.CompositeVideoClip([logo, video.set_position("center")])
 
         final = final.set_duration(video.duration)
         final.write_videofile("slowreverb_processed_done.mp4")
 
         os.system('sh add_audio_to_video.sh -a slowreverb -v slowreverb_processed_done')
+        #p = subprocess.call(['sh', 'add_audio_to_video.sh', '-a slowreverb', '-v slowreverb_processed_done'])
+        #p.wait()
 
         os.remove("./thumbnail/" + fnames[0])
 
@@ -301,8 +354,46 @@ if (url):
                 mime="video/wav"
             )
             
-        os.remove("slowreverb.wav")
-        os.remove("slowreverb.mp4")
-        os.remove("slowreverb_processed.mp4")
-        os.remove("slowreverb_processed_done_processed.mp4")
-    
+        try:
+            dir = './thumbnail/'
+            for f in os.listdir(dir):
+                os.remove(os.path.join(dir, f))
+        except:
+            print("no old files")
+        try:
+            os.remove("slowreverb.wav")
+        except:
+            print("no old files")
+        try:
+            os.remove("slowreverb.mp4")
+        except:
+            print("no old files")
+        try:
+            os.remove("slowreverb_processed.mp4")
+        except:
+            print("no old files")
+        try:
+            os.remove("slowreverb_processed_done.mp4")
+        except:
+            print("no old files")
+        try:
+            os.remove("slowreverb_processed_done_processed.mp4")
+        except:
+            print("no old files")
+        try:
+            os.remove("slowreverb_processed_done_processed.mp4")
+        except:
+            print("no old files")
+        try:
+            os.remove("slowreverb_processed_done_processed.mp4")
+        except:
+            print("no old files")
+        try:
+            os.remove("slow.wav")
+        except:
+            print("no old files")
+        try:
+            os.remove("test.wav")
+        except:
+            print("no old files")
+            

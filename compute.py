@@ -19,13 +19,13 @@ import colorsys
 
 TITLE = ''
 
-WIDTH = 108
-HEIGHT = 72
+WIDTH = 178
+HEIGHT = 100
 
 SAMPLE_SIZE = 2
 CHANNELS = 2
 RATE = 48000
-FPS = 10
+FPS = 12
 nFFT = 128
 WINDOW = 0.5  # in seconds
 
